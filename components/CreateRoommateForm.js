@@ -9,7 +9,7 @@ const CreateRoommateForm = ({ createRoommate }) => {
   };
 
   return (
-    <form id="createRoommateForm" onSubmit={handleSubmit}>
+    <form id="createRoommateForm" onSubmit={handleSubmit} className="component">
       <h3>Add a Roommate</h3>
       <input
         type="text"

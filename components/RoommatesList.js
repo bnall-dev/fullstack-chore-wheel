@@ -4,12 +4,14 @@ const RoommatesList = ({ roommates, deleteRoommate }) => {
   const rmList = roommates.map(rm => (
     <li key={rm.id}>
       {rm.name}
-      <button onClick={() => deleteRoommate(rm)} />
+      <button className="deleteButton" onClick={() => deleteRoommate(rm)}>
+        x
+      </button>
     </li>
   ));
 
   return (
-    <div id="roommatesList">
+    <div id="roommatesList" className="component">
       <h3>Roommates</h3>
       <ul>
         <h4>{rmList}</h4>

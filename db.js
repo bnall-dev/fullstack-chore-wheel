@@ -71,9 +71,9 @@ const createChore = async chore => {
   const response = await client.query(SQL, [chore.name]);
   return response.rows[0];
 };
-const updateChore = async rm => {
+const updateChore = async chore => {
   const SQL = 'UPDATE chores SET name = $1  WHERE id=$2 RETURNING *';
-  const response = await client.query(SQL, [rm.name, rm.id]);
+  const response = await client.query(SQL, [chore.name, chore.id]);
   return response.rows[0];
 };
 const deleteChore = async id => {
@@ -92,16 +92,16 @@ const readRoommateChore = async id => {
   const SQL = 'SELECT * FROM roommate_chores WHERE id = $1';
   const response = await client.query(SQL, [id]);
 };
-const createRoommateChore = async roommateChores => {
+const createRoommateChore = async roommateChore => {
   const SQL =
-    'INSERT INTO author_books ("roommateId", "choreId") VALUES ($1, $2) RETURNING *';
+    'INSERT INTO roommate_chores ("roommateId", "choreId") VALUES ($1, $2) RETURNING *';
   const response = await client.query(SQL, [
-    roommateChores.roommateId,
-    roommateChores.choreId,
+    roommateChore.roommateId,
+    roommateChore.choreId,
   ]);
   return response.rows[0];
 };
-const updateRoommateChore = async roommateChores => {
+const updateRoommateChore = async roommateChore => {
   const SQL =
     'UPDATE roommate_chores SET "roommateId" = $1, "choreId" = $2  WHERE id=$3 RETURNING *';
   const response = await client.query(SQL, [

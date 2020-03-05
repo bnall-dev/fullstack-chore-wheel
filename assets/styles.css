@@ -1,0 +1,69 @@
+html {
+  background-color: orange;
+}
+
+h3 {
+  font-family: 'Baloo';
+  color: navy;
+}
+
+input[type='submit'] {
+  background-color: red;
+  color: white;
+  font-family: 'Baloo';
+  border-radius: 15px;
+}
+
+.deleteButton {
+  background-color: red;
+  font-family: 'Baloo';
+  color: white;
+  border-radius: 50%;
+  border: none;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.component {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  background-color: white;
+  border-radius: 20px;
+  margin: 16px;
+  padding: 16px;
+}
+
+#wheelDiv {
+  justify-content: center;
+  background-color: yellow;
+  border-radius: 50%;
+  width: 275px;
+  height: 275px;
+  border: 10px solid white;
+}
+
+#spinButton {
+  width: 100px;
+  height: 100px;
+  border: 2px solid lightgrey;
+  background-color: white;
+  border-radius: 50%;
+  font-family: 'Baloo';
+  color: navy;
+}
+
+input::placeholder {
+  text-align: center;
+}
+
+@media only screen and (max-width: 450px) {
+}

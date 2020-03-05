@@ -9,7 +9,7 @@ const CreateChoreForm = ({ createChore }) => {
   };
 
   return (
-    <form id="createChoreForm" onSubmit={handleSubmit}>
+    <form id="createChoreForm" onSubmit={handleSubmit} className="component">
       <h3>Add a Chore</h3>
       <input
         type="text"

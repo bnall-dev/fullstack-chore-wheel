@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const db = require('./db');
 app.use(require('cors')());
 app.use(express.json());
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
 
 var myLogger = function(req, res, next) {
@@ -68,7 +69,7 @@ app.post('/api/chores', (req, res, next) => {
     .catch(next);
 });
 app.delete('/api/chores/:id', (req, res, next) => {
-  db.destroyChore(req.params.id)
+  db.deleteChore(req.params.id)
     .then(() => res.sendStatus(204))
     .catch(next);
 });
