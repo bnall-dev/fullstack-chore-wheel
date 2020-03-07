@@ -15,7 +15,7 @@ const sync = async () => {
 
   CREATE TABLE roommates (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    name VARCHAR NOT NULL
+    name VARCHAR UNIQUE NOT NULL
   );
 
 

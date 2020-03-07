@@ -98,7 +98,7 @@ app.post('/api/roommate_chores', (req, res, next) => {
     .catch(next);
 });
 app.delete('/api/roommate_chores/:id', (req, res, next) => {
-  db.destroyRoommateChore(req.params.id)
+  db.deleteRoommateChore(req.params.id)
     .then(() => res.sendStatus(204))
     .catch(next);
 });

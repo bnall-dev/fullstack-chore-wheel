@@ -1,10 +1,32 @@
 html {
-  background-color: orange;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 79, 0, 1) 0%,
+    rgba(255, 156, 0, 1) 44%,
+    rgba(255, 194, 0, 1) 100%
+  );
+}
+
+header {
+  font-family: 'Lobster';
+  color: white;
+  background-color: navy;
+  width: 100vw;
+  text-align: center;
+  box-shadow: 5px 5px 10px #00000080;
 }
 
 h3 {
   font-family: 'Baloo';
   color: navy;
+  margin: 0;
+}
+
+ul {
+  background-color: lightgray;
+  width: 80%;
+  border-radius: 10px;
+  list-style: none;
 }
 
 input[type='submit'] {
@@ -12,6 +34,13 @@ input[type='submit'] {
   color: white;
   font-family: 'Baloo';
   border-radius: 15px;
+  outline: none;
+  margin: 8px;
+}
+
+input[type='text'] {
+  border: 2px solid lightgray;
+  outline: none;
 }
 
 .deleteButton {
@@ -20,12 +49,15 @@ input[type='submit'] {
   color: white;
   border-radius: 50%;
   border: none;
+  margin: 16px;
 }
 
 #app {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  top: -10px;
 }
 
 .component {
@@ -33,6 +65,8 @@ input[type='submit'] {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 80%;
+  box-shadow: 5px 5px 10px #00000080;
 }
 
 form {
@@ -44,11 +78,14 @@ form {
 
 #wheelDiv {
   justify-content: center;
-  background-color: yellow;
+  background-image: url('wheel.png');
+  background-size: contain;
   border-radius: 50%;
   width: 275px;
   height: 275px;
   border: 10px solid white;
+  margin: 16px;
+  box-shadow: 5px 5px 10px #00000080;
 }
 
 #spinButton {
@@ -59,10 +96,18 @@ form {
   border-radius: 50%;
   font-family: 'Baloo';
   color: navy;
+  outline: none;
+  box-shadow: 5px 5px 10px #00000080;
 }
 
 input::placeholder {
   text-align: center;
+}
+
+.list {
+  background-color: white;
+  padding: 16px;
+  border-radius: 10px;
 }
 
 @media only screen and (max-width: 450px) {

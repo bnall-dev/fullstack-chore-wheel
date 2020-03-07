@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
+import Axios from 'axios';
 
-const Wheel = ({ roommates, chores, roommateChores, setRoommateChores }) => {
-  const spinWheel = () => {};
+const Wheel = ({
+  roommates,
+  chores,
+  roommateChores,
+  createRoommateChore,
+  deleteRoommateChore,
+}) => {
+  const spinWheel = e => {
+    e.preventDefault();
+  };
 
   return (
     <div id="wheelDiv" className="component">
