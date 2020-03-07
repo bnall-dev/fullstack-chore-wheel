@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 const morgan = require('morgan');
 const db = require('./db');
+const helpers = require('./helpers');
 app.use(require('cors')());
 app.use(express.json());
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
@@ -93,8 +94,14 @@ app.get('/api/roommate_chores/:id', (req, res, next) => {
     .catch(next);
 });
 app.post('/api/roommate_chores', (req, res, next) => {
-  db.createRoommateChore(req.body)
-    .then(rmc => res.send(rmc))
+  const mappedChores = helpers.mapChoresToRoommates(req.body);
+  db.createRoommateChores(mappedChores)
+    .then(() => res.send(mappedChores))
+    .catch(next);
+});
+app.delete('/api/roommate_chores/', (req, res, next) => {
+  db.deleteRoommateChores()
+    .then(() => res.sendStatus(204))
     .catch(next);
 });
 app.delete('/api/roommate_chores/:id', (req, res, next) => {

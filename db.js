@@ -1,4 +1,5 @@
 const pg = require('pg');
+const format = require('pg-format');
 const client = new pg.Client(
   process.env.DATABASE_URL || 'postgres://localhost/chore_wheel'
 );
@@ -92,14 +93,14 @@ const readRoommateChore = async id => {
   const SQL = 'SELECT * FROM roommate_chores WHERE id = $1';
   const response = await client.query(SQL, [id]);
 };
-const createRoommateChore = async roommateChore => {
-  const SQL =
-    'INSERT INTO roommate_chores ("roommateId", "choreId") VALUES ($1, $2) RETURNING *';
-  const response = await client.query(SQL, [
-    roommateChore.roommateId,
-    roommateChore.choreId,
-  ]);
-  return response.rows[0];
+const createRoommateChores = async mappings => {
+  const formattedMapping = mappings.map(m => [m.roommateId, m.choreId]);
+  const createSQL =
+    'INSERT INTO roommate_chores ("roommateId", "choreId") VALUES %L RETURNING *';
+  const sql = format(createSQL, formattedMapping);
+  console.log(mappings);
+  const response = await client.query(sql);
+  return response;
 };
 const updateRoommateChore = async roommateChore => {
   const SQL =
@@ -111,6 +112,13 @@ const updateRoommateChore = async roommateChore => {
   ]);
   return response.rows[0];
 };
+
+const deleteRoommateChores = async id => {
+  const SQL = 'DELETE FROM roommate_chores';
+  const response = await client.query(SQL);
+  return response.rows;
+};
+
 const deleteRoommateChore = async id => {
   const SQL = 'DELETE FROM roommate_chores WHERE id=$1';
   const response = await client.query(SQL, [id]);
@@ -131,7 +139,8 @@ module.exports = {
   deleteChore,
   readRoommateChores,
   readRoommateChore,
-  createRoommateChore,
+  createRoommateChores,
   updateRoommateChore,
+  deleteRoommateChores,
   deleteRoommateChore,
 };

@@ -10,8 +10,8 @@ const RoommatesList = ({
     const rmAssignedChores = roommateChores.filter(
       rmc => rmc.roommateId === rm.id
     );
-    const rmAssignedChoresList = rmAssignedChores.map(rmac => {
-      const key = 'roommateassignedchore-' + rmac.id;
+    const rmAssignedChoresList = rmAssignedChores.map((rmac, i) => {
+      const key = 'roommateassignedchore-' + i;
       const rmAssignedChore = chores.find(chore => chore.id === rmac.choreId);
       return <li key={key}>{rmAssignedChore.name}</li>;
     });

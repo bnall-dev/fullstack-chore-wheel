@@ -57,7 +57,20 @@ const App = () => {
     setChores(chores.filter(chore => chore.id !== choreToDestroy.id));
   };
 
-  const createRoommateChore = async rmc => {};
+  const roommateIds = roommates.map(rm => rm.id);
+  const choreIds = chores.map(chore => chore.id);
+  const createRoommateChores = async assignedChores => {
+    const created = (
+      await axios.post('/api/roommate_chores/', { roommateIds, choreIds })
+    ).data;
+    setRoommateChores(created);
+  };
+
+  const deleteRoommateChores = async () => {
+    await axios.delete(`/api/roommate_chores/`);
+    setRoommateChores([]);
+  };
+
   const deleteRoommateChore = async rmcToDestroy => {
     await axios.delete(`/api/roommate_chores/${rmcToDestroy.id}`);
     setRoommateChores(roommateChores.filter(rmc => rmc.id !== rmcToDestroy.id));
@@ -72,9 +85,10 @@ const App = () => {
         roommates={roommates}
         chores={chores}
         roommateChores={roommateChores}
-        createRoommateChore={createRoommateChore}
+        createRoommateChores={createRoommateChores}
         setRoommateChores={setRoommateChores}
         deleteRoommateChore={deleteRoommateChore}
+        deleteRoommateChores={deleteRoommateChores}
       />
       <RoommatesList
         roommates={roommates}
