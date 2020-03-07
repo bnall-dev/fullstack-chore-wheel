@@ -95,6 +95,8 @@
 
   #wheelImg {
     animation: rotation 2s infinite linear;
+    overflow: hidden;
+    border-radius: 50%;
   }
 
   @keyframes rotation {
