@@ -13,7 +13,11 @@ const RoommatesList = ({
     const rmAssignedChoresList = rmAssignedChores.map((rmac, i) => {
       const key = 'roommateassignedchore-' + i;
       const rmAssignedChore = chores.find(chore => chore.id === rmac.choreId);
-      return <li key={key}>{rmAssignedChore.name}</li>;
+      return (
+        <h5 key={key}>
+          <li>{rmAssignedChore.name}</li>
+        </h5>
+      );
     });
     const key = 'roommate-' + rm.id;
 

@@ -36,26 +36,13 @@ const App = () => {
     const created = (await axios.post('/api/roommates/', rm)).data;
     setRoommates([...roommates, created]);
   };
-  const deleteRoommate = async rmToDestroy => {
-    await axios.delete(`/api/roommates/${rmToDestroy.id}`);
-    setRoommates(roommates.filter(rm => rm.id !== rmToDestroy.id));
-  };
+  const deleteRoommate = async rmToDestroy => {};
 
   const createChore = async chore => {
     const created = (await axios.post('/api/chores/', chore)).data;
     setChores([...chores, created]);
   };
-  const deleteChore = async choreToDestroy => {
-    const assigned = roommateChores.filter(
-      chore => chore.choreId === choreToDestroy.id
-    );
-    assigned.map(
-      async chore =>
-        await axios.delete(`/api/roommate_chores/${assigned[0].id}`)
-    );
-    await axios.delete(`/api/chores/${choreToDestroy.id}`);
-    setChores(chores.filter(chore => chore.id !== choreToDestroy.id));
-  };
+  const deleteChore = async choreToDestroy => {};
 
   const roommateIds = roommates.map(rm => rm.id);
   const choreIds = chores.map(chore => chore.id);
@@ -80,26 +67,34 @@ const App = () => {
     <div id="app">
       <header>
         <h1>Chore Wheel</h1>
+        <img id="icon" src="./assets/icon.png" />
       </header>
-      <Wheel
-        roommates={roommates}
-        chores={chores}
-        roommateChores={roommateChores}
-        createRoommateChores={createRoommateChores}
-        setRoommateChores={setRoommateChores}
-        deleteRoommateChore={deleteRoommateChore}
-        deleteRoommateChores={deleteRoommateChores}
-      />
-      <RoommatesList
-        roommates={roommates}
-        deleteRoommate={deleteRoommate}
-        chores={chores}
-        roommateChores={roommateChores}
-      />
-      <CreateRoommateForm createRoommate={createRoommate} />
+      <div id="components">
+        <Wheel
+          roommates={roommates}
+          chores={chores}
+          roommateChores={roommateChores}
+          createRoommateChores={createRoommateChores}
+          setRoommateChores={setRoommateChores}
+          deleteRoommateChore={deleteRoommateChore}
+          deleteRoommateChores={deleteRoommateChores}
+        />
+        <RoommatesList
+          roommates={roommates}
+          deleteRoommate={deleteRoommate}
+          chores={chores}
+          roommateChores={roommateChores}
+          deleteRoommateChore={deleteRoommateChore}
+        />
+        <CreateRoommateForm createRoommate={createRoommate} />
 
-      <CreateChoreForm createChore={createChore} />
-      <ChoresList chores={chores} deleteChore={deleteChore} />
+        <CreateChoreForm createChore={createChore} />
+        <ChoresList
+          chores={chores}
+          deleteChore={deleteChore}
+          deleteRoommateChore={deleteRoommateChore}
+        />
+      </div>
     </div>
   );
 };
