@@ -24,10 +24,19 @@
   }
 
   ul {
+    display: flex;
     background-color: lightgray;
     width: 80%;
     border-radius: 10px;
     list-style: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+
+  li > ul {
+    display: flex;
+    flex-direction: column;
   }
 
   input[type='submit'] {
@@ -51,11 +60,16 @@
 
   .deleteButton {
     background-color: red;
-    font-family: 'Baloo';
     color: white;
     border-radius: 50%;
     border: none;
     margin: 16px;
+    width: 1.5em;
+    height: 1.5em;
+    padding: 5px;
+    line-height: 0.2;
+    font-weight: bolder;
+    text-align: center;
   }
 
   #app {
@@ -122,6 +136,10 @@
     outline: none;
     box-shadow: 5px 5px 10px #00000080;
     animation: none;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
   }
 
   #spinButton:hover {

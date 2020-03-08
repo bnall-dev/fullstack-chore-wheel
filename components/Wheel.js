@@ -20,7 +20,7 @@ const Wheel = ({
   return (
     <div id="wheelDiv" className="component">
       <img id="wheelImg" src="../../assets/wheel.png" />
-      <button id="spinButton" onClick={spinWheel} onTouchStart={spinWheel}>
+      <button id="spinButton" onClick={spinWheel}>
         <h1>SPIN!</h1>
       </button>
     </div>
