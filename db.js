@@ -29,7 +29,8 @@ const sync = async () => {
   CREATE TABLE roommate_chores (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     "roommateId" UUID NOT NULL REFERENCES roommates(id),
-    "choreId" UUID NOT NULL REFERENCES chores(id)
+    "choreId" UUID NOT NULL REFERENCES chores(id),
+    "isDone" BOOLEAN DEFAULT false
   );
   `;
   await client.query(SQL);
@@ -54,7 +55,7 @@ const updateRoommate = async rm => {
   return response.rows[0];
 };
 const deleteRoommate = async id => {
-  const SQL = 'DELETE FROM roommates WHERE id=$1';
+  const SQL = `DELETE FROM roommates WHERE id=$1`;
   const response = await client.query(SQL, [id]);
   return response.rows;
 };
@@ -78,7 +79,9 @@ const updateChore = async chore => {
   return response.rows[0];
 };
 const deleteChore = async id => {
-  const SQL = 'DELETE FROM chores WHERE id=$1';
+  const SQL = `
+  DELETE FROM chores WHERE id=$1
+  `;
   const response = await client.query(SQL, [id]);
   return response.rows;
 };
@@ -94,21 +97,22 @@ const readRoommateChore = async id => {
   const response = await client.query(SQL, [id]);
 };
 const createRoommateChores = async mappings => {
-  const formattedMapping = mappings.map(m => [m.roommateId, m.choreId]);
-  const createSQL =
-    'INSERT INTO roommate_chores ("roommateId", "choreId") VALUES %L RETURNING *';
-  const sql = format(createSQL, formattedMapping);
   console.log(mappings);
+  const formattedMapping = mappings.map(m => [m.roommateId, m.choreId]);
+  const createSQL = `DELETE FROM roommate_chores;
+    INSERT INTO roommate_chores ("roommateId", "choreId") VALUES %L RETURNING *`;
+  const sql = format(createSQL, formattedMapping);
   const response = await client.query(sql);
   return response;
 };
 const updateRoommateChore = async roommateChore => {
   const SQL =
-    'UPDATE roommate_chores SET "roommateId" = $1, "choreId" = $2  WHERE id=$3 RETURNING *';
+    'UPDATE roommate_chores SET "roommateId" = $1, "choreId" = $2, "isDone" = $3  WHERE id=$4 RETURNING *';
   const response = await client.query(SQL, [
-    roommateChores.roommateId,
-    roommateChores.choreId,
-    roommateChores.id,
+    roommateChore.roommateId,
+    roommateChore.choreId,
+    roommateChore.isDone,
+    roommateChore.id,
   ]);
   return response.rows[0];
 };

@@ -4,21 +4,19 @@ const ChoresList = ({ chores, deleteChore }) => {
   const choreList = chores.map(chore => {
     const key = 'chore-' + chore.id;
     return (
-      <h4 key={key}>
-        <li>
-          {chore.name}
-          <button className="deleteButton" onClick={() => deleteChore(chore)}>
-            x
-          </button>
-        </li>
-      </h4>
+      <li className="chore" key={key}>
+        <h4>{chore.name}</h4>
+        <button className="deleteButton" onClick={() => deleteChore(chore)}>
+          X
+        </button>
+      </li>
     );
   });
 
   return (
-    <div id="choresList" className="component list">
+    <div id="choresListDiv" className="component list">
       <h3>Chores</h3>
-      <ul>{choreList}</ul>
+      <ul id="choreList">{choreList}</ul>
     </div>
   );
 };

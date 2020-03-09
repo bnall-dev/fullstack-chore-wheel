@@ -1,43 +1,30 @@
 import React, { useState } from 'react';
+import Axios from 'axios';
 
 const RoommatesList = ({
   roommates,
   deleteRoommate,
   chores,
   roommateChores,
+  setRoommateChores,
 }) => {
   const rmList = roommates.map(rm => {
-    const rmAssignedChores = roommateChores.filter(
-      rmc => rmc.roommateId === rm.id
-    );
-    const rmAssignedChoresList = rmAssignedChores.map((rmac, i) => {
-      const key = 'roommateassignedchore-' + i;
-      const rmAssignedChore = chores.find(chore => chore.id === rmac.choreId);
-      return (
-        <h5 key={key}>
-          <li>{rmAssignedChore.name}</li>
-        </h5>
-      );
-    });
     const key = 'roommate-' + rm.id;
 
     return (
-      <li key={key}>
-        {rm.name}
+      <li className="rm" key={key}>
+        <h4>{rm.name}</h4>
         <button className="deleteButton" onClick={() => deleteRoommate(rm)}>
-          x
+          X
         </button>
-        <ul>{rmAssignedChoresList}</ul>
       </li>
     );
   });
 
   return (
-    <div id="roommatesList" className="component list">
+    <div id="roommatesListDiv" className="component list">
       <h3>Roommates</h3>
-      <ul>
-        <h4>{rmList}</h4>
-      </ul>
+      <ul id="rmList">{rmList}</ul>
     </div>
   );
 };

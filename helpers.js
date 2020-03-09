@@ -6,6 +6,7 @@ function mapChoresToRoommates({ roommateIds, choreIds }) {
     assigned.push({
       choreId: choreIds[choreStart],
       roommateId: roommateIds[rmStart],
+      isDone: 'false',
     });
     if (rmStart === roommateIds.length - 1) {
       rmStart = 0;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Axios from 'axios';
 
 const Wheel = ({
+  setMessage,
   roommates,
   chores,
   roommateChores,
@@ -9,12 +10,26 @@ const Wheel = ({
   deleteRoommateChores,
   deleteRoommateChore,
 }) => {
-  const spinWheel = e => {
+  const spinWheel = async e => {
     e.preventDefault();
-    if (roommates.length !== 0 && chores.length !== 0) {
-      deleteRoommateChores();
-      createRoommateChores();
-    }
+    const message = document.getElementById('message');
+
+    const wheelImg = document.getElementById('wheelImg');
+    wheelImg.style.animation = 'rotation 1s infinite linear';
+    setTimeout(function() {
+      wheelImg.style.animationPlayState = 'paused';
+    }, 1500);
+    const needle = document.getElementById('needle');
+    needle.style.animation = 'clicker 0.15s infinite linear';
+    setTimeout(function() {
+      needle.style = 'transform: initial';
+    }, 1500);
+    setTimeout(function() {
+      if (roommates.length > 1 && chores.length > 1) {
+        setMessage(['', '']);
+        createRoommateChores();
+      }
+    }, 1500);
   };
 
   return (
@@ -23,6 +38,7 @@ const Wheel = ({
       <button id="spinButton" onClick={spinWheel}>
         <h1>SPIN!</h1>
       </button>
+      <div id="needle"></div>
     </div>
   );
 };
