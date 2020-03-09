@@ -462,6 +462,7 @@ input::placeholder {
   }
   a {
     width: 30vw;
+    outline: none;
   }
 
   #menu {
